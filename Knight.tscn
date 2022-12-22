@@ -1,0 +1,470 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://art/sword.png" type="Texture" id=1]
+[ext_resource path="res://art/chest.png" type="Texture" id=2]
+[ext_resource path="res://art/helmet.png" type="Texture" id=3]
+[ext_resource path="res://code/knight.gd" type="Script" id=4]
+[ext_resource path="res://art/shadow.png" type="Texture" id=5]
+[ext_resource path="res://art/swing.png" type="Texture" id=6]
+[ext_resource path="res://art/spark.png" type="Texture" id=7]
+[ext_resource path="res://art/pointer.png" type="Texture" id=8]
+
+[sub_resource type="CircleShape2D" id=8]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 8.0
+height = 25.0
+
+[sub_resource type="CapsuleShape2D" id=10]
+height = 15.0
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/animations/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 3.57628e-06 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/animations/head:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/animations/weapon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -3.99995, 15 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/animations/weapon:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -270.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/animations/chest:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 5.96046e-08 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/animations/chest:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -280.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("pivot/animations/weapon/shine:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("pivot/pointer:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/animations/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -1, 3.57628e-06 ), Vector2( -1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/animations/weapon:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -3.99995, 15 ), Vector2( -2.99994, 15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/animations/chest:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 2, 5.96046e-08 ), Vector2( 2, 5.96046e-08 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/animations/head:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 90.0, 90.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/animations/weapon:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -270.0, -270.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/animations/chest:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -280.0, -280.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("pivot/animations/swing:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("pivot/animations/weapon/shine:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("pivot/pointer:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "zparry"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/animations/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, -1 ), Vector2( -1, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/animations/head:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 85.0, 85.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/animations/weapon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -9, 1 ), Vector2( -9, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/animations/weapon:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -285.0, -285.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/animations/chest:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 0 ), Vector2( 2, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/animations/chest:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -240.0, -240.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("pivot/animations/swing:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/pointer:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "swing"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/pointer:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/animations/swing:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/animations/swing:visible")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/animations/swing:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Knight" type="KinematicBody2D"]
+script = ExtResource( 4 )
+
+[node name="controller" type="Node2D" parent="."]
+
+[node name="shadow" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
+[node name="pivot" type="Position2D" parent="."]
+rotation = 1.5708
+
+[node name="pointer" type="Sprite" parent="pivot"]
+position = Vector2( -12, 0 )
+rotation = -1.5708
+texture = ExtResource( 8 )
+hframes = 2
+
+[node name="animations" type="Node2D" parent="pivot"]
+
+[node name="chest" type="Sprite" parent="pivot/animations"]
+position = Vector2( 2, 5.96046e-08 )
+rotation = -4.88692
+texture = ExtResource( 2 )
+
+[node name="weapon" type="Sprite" parent="pivot/animations"]
+position = Vector2( -3.99995, 15 )
+rotation = -4.71239
+texture = ExtResource( 1 )
+
+[node name="shine" type="Sprite" parent="pivot/animations/weapon"]
+visible = false
+position = Vector2( 6.28309, 0.723075 )
+texture = ExtResource( 7 )
+
+[node name="swing" type="Sprite" parent="pivot/animations"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -16, 5.81741e-05 )
+rotation = -1.5708
+texture = ExtResource( 6 )
+
+[node name="head" type="Sprite" parent="pivot/animations"]
+position = Vector2( -1, 3.57628e-06 )
+rotation = 1.5708
+texture = ExtResource( 3 )
+
+[node name="hurtbox" type="Area2D" parent="pivot"]
+visible = false
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hurtbox"]
+shape = SubResource( 8 )
+
+[node name="hitbox" type="Area2D" parent="pivot"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox"]
+position = Vector2( -21, 7.62939e-05 )
+shape = SubResource( 9 )
+
+[node name="blockbox" type="Area2D" parent="pivot"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/blockbox"]
+position = Vector2( -10, 3.62396e-05 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/idle = SubResource( 3 )
+anims/parry = SubResource( 4 )
+anims/ready = SubResource( 5 )
+anims/swing = SubResource( 6 )
