@@ -1,6 +1,8 @@
 # input processing control for player, attached to "controller" node
 extends Node2D
 
+var action
+
 func ready():
 	Global.set_player(self)
 
@@ -14,14 +16,12 @@ func get_input_vector():
 	return input_vector.normalized()
 	
 func get_action_input():
-	var action
+	action = "idle"
 	if(Input.is_action_pressed("left_mouse")):
 		action = "ready"
 	elif(Input.is_action_just_released("left_mouse")):
 		action = "swing"
 	elif(Input.is_action_pressed("right_mouse")):
 		action = "parry"
-	else:
-		action = "idle"
 	return action
 	

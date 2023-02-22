@@ -26,14 +26,12 @@ func _process(delta):
 	movement_processing(delta)
 	# processs user combat actions
 	action_processing()
-	
 	# move player
 	velocity = move_and_slide(velocity)
-	
 	#print out debug every half second
 	counter += delta
 	if(counter > 0.5):
-		# debug_output()
+		debug_output()
 		counter = 0
 
 
@@ -68,8 +66,12 @@ func action_processing():
 		animator.play("parry")
 		velocity = velocity * 0.9
 	else:
+		animator.play()
 		animator.queue("idle")
+	
 		
 func debug_output():
-	print("\n", self.get_name())
-	print("pivot: ", $pivot.rotation)
+	#print("\n", self.get_name())
+	#print("pivot: ", $pivot.rotation)
+	pass
+	

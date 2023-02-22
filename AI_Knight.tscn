@@ -7,3 +7,6 @@
 
 [node name="controller" parent="." index="0"]
 script = ExtResource( 2 )
+
+[node name="swing" parent="pivot/animations" index="2"]
+visible = true
