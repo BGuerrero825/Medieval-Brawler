@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://art/metronome.png" type="Texture" id=1]
+[ext_resource path="res://art/metronome.png" type="Texture2D" id=1]
 [ext_resource path="res://code/metronome.gd" type="Script" id=2]
 
-[node name="metronome" type="Sprite"]
+[node name="metronome" type="Sprite2D"]
 texture = ExtResource( 1 )
 hframes = 4
 script = ExtResource( 2 )

@@ -1,19 +1,18 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 #movement constants
-export var MAX_SPEED := 100.0
-export var ACCELERATION := 500.0
-export var FRICTION := 400.0
-export var ROTATION_SPEED = 0.25
+@export var MAX_SPEED := 100.0
+@export var ACCELERATION := 500.0
+@export var FRICTION := 400.0
+@export var ROTATION_SPEED = 0.25
 # global vars
 var movement_allowed = true
 var input_vector := Vector2(0,0)
-var velocity := Vector2(0,0)
 var counter := 0.0
 var rotation_dir := 0
 
-onready var animator = $AnimationPlayer
+@onready var animator = $AnimationPlayer
 
 func _ready():
 	animator.play("idle")
@@ -27,7 +26,9 @@ func _process(delta):
 	# processs user combat actions
 	action_processing()
 	# move player
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	# velocity = velocity
 	#print out debug every half second
 	counter += delta
 	if(counter > 0.5):
@@ -72,6 +73,6 @@ func action_processing():
 		
 func debug_output():
 	#print("\n", self.get_name())
-	#print("pivot: ", $pivot.rotation)
+	print("pivot: ", $pivot.rotation)
 	pass
 	
