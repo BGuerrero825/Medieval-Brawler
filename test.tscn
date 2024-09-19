@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://16ofc8ygsdek"]
+[gd_scene load_steps=7 format=3 uid="uid://16ofc8ygsdek"]
 
 [ext_resource type="Texture2D" uid="uid://8vtdb34qdrcf" path="res://art/background.png" id="1_dt1wx"]
 [ext_resource type="Texture2D" uid="uid://1pby3hpho3uu" path="res://art/orb.png" id="2_c0jsy"]
 [ext_resource type="PackedScene" uid="uid://d0aq0lvdymtje" path="res://Player.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://ccpclm1mvohi6" path="res://art/spot.png" id="3_xi1yj"]
 [ext_resource type="PackedScene" path="res://AI_Knight.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b8xbq10drbqeg" path="res://BoomBox.tscn" id="6_6lfbx"]
 
 [node name="base" type="Node2D"]
 texture_filter = 1
@@ -15,12 +16,12 @@ texture = ExtResource("1_dt1wx")
 region_enabled = true
 region_rect = Rect2(0, 0, 800, 800)
 
-[node name="Orb3" type="Sprite2D" parent="."]
+[node name="Orb" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(227, 139)
+position = Vector2(66, 118)
 texture = ExtResource("2_c0jsy")
 
-[node name="Light3D" type="PointLight2D" parent="Orb3"]
+[node name="Light3D" type="PointLight2D" parent="Orb"]
 color = Color(0.984314, 0.427451, 0.12549, 1)
 energy = 0.8
 range_item_cull_mask = 3
@@ -31,11 +32,29 @@ texture = ExtResource("3_xi1yj")
 texture_scale = 3.0
 
 [node name="Player" parent="." instance=ExtResource("3")]
-position = Vector2(-54, 14)
+position = Vector2(150, 84)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 texture_filter = 1
-position = Vector2(54, -14)
 
 [node name="Knight" parent="." instance=ExtResource("4")]
-position = Vector2(60, 52)
+position = Vector2(-134, 17)
+
+[node name="BoomBox" parent="." instance=ExtResource("6_6lfbx")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 248.0
+offset_top = 5.0
+offset_right = 248.0
+offset_bottom = 45.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 14.0
+offset_bottom = 14.0
+texture = ExtResource("2_c0jsy")
