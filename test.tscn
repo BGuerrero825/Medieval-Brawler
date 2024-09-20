@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://16ofc8ygsdek"]
 
-[ext_resource type="Texture2D" uid="uid://8vtdb34qdrcf" path="res://art/background.png" id="1_dt1wx"]
-[ext_resource type="Texture2D" uid="uid://1pby3hpho3uu" path="res://art/orb.png" id="2_c0jsy"]
-[ext_resource type="PackedScene" uid="uid://d0aq0lvdymtje" path="res://Player.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://ccpclm1mvohi6" path="res://art/spot.png" id="3_xi1yj"]
-[ext_resource type="PackedScene" path="res://AI_Knight.tscn" id="4"]
-[ext_resource type="Script" path="res://code/player_camera.gd" id="6_1ce3y"]
-[ext_resource type="PackedScene" uid="uid://b8xbq10drbqeg" path="res://BoomBox.tscn" id="6_6lfbx"]
-[ext_resource type="Script" path="res://BeatController.gd" id="8_2xliu"]
-[ext_resource type="PackedScene" uid="uid://bhyrj6sq576c6" path="res://gui.tscn" id="9_nl12s"]
+[ext_resource type="Texture2D" uid="uid://8vtdb34qdrcf" path="res://environment_assets/background.png" id="1_dt1wx"]
+[ext_resource type="Texture2D" uid="uid://1pby3hpho3uu" path="res://environment_assets/orb.png" id="2_c0jsy"]
+[ext_resource type="PackedScene" uid="uid://d0aq0lvdymtje" path="res://player/Player.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://ccpclm1mvohi6" path="res://environment_assets/spot.png" id="3_xi1yj"]
+[ext_resource type="PackedScene" uid="uid://blltoklscxbvc" path="res://fighter/aiFighter.tscn" id="4"]
+[ext_resource type="Script" path="res://player/playerCamera.gd" id="6_1ce3y"]
+[ext_resource type="PackedScene" uid="uid://b8xbq10drbqeg" path="res://boombox/BoomBox.tscn" id="6_6lfbx"]
+[ext_resource type="Script" path="res://beatcontroller/BeatController.gd" id="8_2xliu"]
+[ext_resource type="PackedScene" uid="uid://bhyrj6sq576c6" path="res://gui/gui.tscn" id="9_nl12s"]
 
 [node name="base" type="Node2D"]
 texture_filter = 1

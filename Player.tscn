@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0aq0lvdymtje"]
-
-[ext_resource type="PackedScene" uid="uid://dt1nkv6r851nn" path="res://Knight.tscn" id="1_hxs2o"]
-[ext_resource type="Script" path="res://code/player_controller.gd" id="4"]
-
-[node name="Knight" instance=ExtResource("1_hxs2o")]
-
-[node name="controller" parent="." index="0"]
-script = ExtResource("4")

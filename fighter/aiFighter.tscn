@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://blltoklscxbvc"]
+
+[ext_resource type="PackedScene" uid="uid://dt1nkv6r851nn" path="res://fighter/Fighter.tscn" id="1"]
+[ext_resource type="Script" path="res://fighter/aiFighterController.gd" id="2"]
+
+[node name="Fighter" instance=ExtResource("1")]
+
+[node name="controller" parent="." index="0"]
+script = ExtResource("2")
+
+[node name="swing" parent="pivot/animations" index="2"]
+visible = true
