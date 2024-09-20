@@ -2,7 +2,7 @@ extends Node2D
 
 const CORE_BPM = 160
 
-var beatMarker = null
+var gui = null
 var boomBox = null
 
 var time := 0.0
@@ -27,24 +27,27 @@ func _process(delta):
 
 # triggers beat dependent actions
 func update():
-	print("update beatController")
-	if beatMarker:
-		beatMarker.pulse()
+	if gui:
+		gui.pulse()
 	if boomBox:
 		boomBox.sync()
 
-func setBeatMarker(newBeatMarker):
-	beatMarker = newBeatMarker
+func setGui(newGui):
+	gui = newGui 
+	var slider = gui.get_node("HSlider")
+	slider.value_changed.connect(_on_h_slider_value_changed)
 
 func setBoomBox(newBoomBox):
 	boomBox = newBoomBox
 
 func setBpm(newBpm: float):
-	bpm = newBpm 
-	beatCadence = 60.0 / bpm
+	bpm = newBpm
+	beatCadence = 60.0 / newBpm
 	print("beat Cadence changed to: ", beatCadence)
+
 
 
 func _on_h_slider_value_changed(value:float):
 	print("value changed to: ", value)
-	self.setBpm(CORE_BPM + value)
+	setBpm(CORE_BPM + value)
+	#bcon.setBpm(bcon.CORE_BPM + value)

@@ -1,11 +1,11 @@
-extends AnimationPlayer
+extends CanvasLayer 
 
 var bcon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	bcon = Global.beatController
-	bcon.setBeatMarker(self)
+	bcon.setGui(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -13,4 +13,8 @@ func _process(_delta):
 
 func pulse():
 	var playbackSpeed = 1.0 / bcon.beatCadence
-	self.play("beat_fade", -1, playbackSpeed)
+	$AnimationPlayer.play("beat_fade", -1, playbackSpeed)
+
+
+func _on_h_slider_value_changed(value:float):
+	pass

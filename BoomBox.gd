@@ -19,9 +19,9 @@ func _process(_delta):
 	pass
 
 func sync():
-	var scale = bcon.bpm / bcon.CORE_BPM 
-	$HihatDown.pitch_scale = scale
-	$Openhat.pitch_scale = scale
-	$Kick.pitch_scale = scale
-	$SnareBase.pitch_scale = scale
-	$HihatUp.pitch_scale = scale
+	var newScale = bcon.bpm / bcon.CORE_BPM 
+	$HihatDown.pitch_scale = newScale
+	$Openhat.pitch_scale = newScale
+	$Kick.pitch_scale = newScale
+	$SnareBase.pitch_scale = newScale
+	$HihatUp.pitch_scale = newScale

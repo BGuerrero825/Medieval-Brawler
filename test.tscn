@@ -1,34 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://16ofc8ygsdek"]
+[gd_scene load_steps=10 format=3 uid="uid://16ofc8ygsdek"]
 
 [ext_resource type="Texture2D" uid="uid://8vtdb34qdrcf" path="res://art/background.png" id="1_dt1wx"]
 [ext_resource type="Texture2D" uid="uid://1pby3hpho3uu" path="res://art/orb.png" id="2_c0jsy"]
 [ext_resource type="PackedScene" uid="uid://d0aq0lvdymtje" path="res://Player.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://ccpclm1mvohi6" path="res://art/spot.png" id="3_xi1yj"]
 [ext_resource type="PackedScene" path="res://AI_Knight.tscn" id="4"]
+[ext_resource type="Script" path="res://code/player_camera.gd" id="6_1ce3y"]
 [ext_resource type="PackedScene" uid="uid://b8xbq10drbqeg" path="res://BoomBox.tscn" id="6_6lfbx"]
-[ext_resource type="Script" path="res://BeatMarker.gd" id="7_bvy47"]
 [ext_resource type="Script" path="res://BeatController.gd" id="8_2xliu"]
-
-[sub_resource type="Animation" id="Animation_avrsq"]
-resource_name = "beat_fade"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BeatMarker:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.501961, 0.501961, 0.501961, 0), Color(0.501961, 0.501961, 0.501961, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hc14"]
-_data = {
-"beat_fade": SubResource("Animation_avrsq")
-}
+[ext_resource type="PackedScene" uid="uid://bhyrj6sq576c6" path="res://gui.tscn" id="9_nl12s"]
 
 [node name="base" type="Node2D"]
 texture_filter = 1
@@ -62,46 +42,11 @@ position = Vector2(150, 84)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 texture_filter = 1
+script = ExtResource("6_1ce3y")
 
 [node name="Knight" parent="." instance=ExtResource("4")]
 position = Vector2(-134, 17)
 
 [node name="BoomBox" parent="." instance=ExtResource("6_6lfbx")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 0
-offset_left = 248.0
-offset_top = 5.0
-offset_right = 248.0
-offset_bottom = 45.0
-
-[node name="HSlider" type="HSlider" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = -82.0
-offset_top = 4.0
-offset_right = -32.0
-offset_bottom = 24.0
-min_value = -50.0
-max_value = 50.0
-ticks_on_borders = true
-
-[node name="BeatMarker" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 6.0
-offset_right = 28.0
-offset_bottom = 20.0
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_c0jsy")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
-libraries = {
-"": SubResource("AnimationLibrary_6hc14")
-}
-script = ExtResource("7_bvy47")
-
-[connection signal="value_changed" from="CanvasLayer/Control/HSlider" to="BeatController" method="_on_h_slider_value_changed"]
+[node name="CanvasLayer" parent="." instance=ExtResource("9_nl12s")]
