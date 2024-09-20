@@ -16,7 +16,7 @@ var rotation_dir := 0
 
 func _ready():
 	animator.play("idle")
-	Global.set_player(self)
+	Global.setPlayer(self)
 	
 func _process(delta):
 	# rotate player based on mouse location
@@ -73,6 +73,6 @@ func action_processing():
 		
 func debug_output():
 	#print("\n", self.get_name())
-	print("pivot: ", $pivot.rotation)
+	#print("pivot: ", $pivot.rotation)
 	pass
 	

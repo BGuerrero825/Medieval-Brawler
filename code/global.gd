@@ -1,15 +1,36 @@
 extends Node
 
-var player
-var time := 0.0
-var beat = 0
+const CORE_BPM = 160
 
-func set_player(new_player):
-	player = new_player
+var player = null
+var beatMarker = null
+var boomBox = null
+var beatController = null
+
+var time := 0.0
+var bpm := 160.0
+var beatCadence := 60.0 / bpm 
+var beatCount := 0 
+
+func setPlayer(newPlayer):
+	player = newPlayer
+
+func setBeatController(newBeatController):
+	beatController = newBeatController
+
+func setBoomBox(newBoomBox):
+	boomBox = newBoomBox 
 
 func _process(delta):
+	# update global beat and dependent systems when enough time elapses
 	time += delta
-	var old_beat = beat
-	beat = int(floor(time * 3))
-	if beat != old_beat:
-		print(beat)
+	if time > beatCadence:
+		time -= beatCadence
+		beatCount += 1 
+		beatController.update()
+		print(beatCount)
+
+func setBpm(newBpm: float):
+	bpm = newBpm 
+	beatCadence = 60.0 / bpm
+	print("beat Cadence changed to: ", beatCadence)
