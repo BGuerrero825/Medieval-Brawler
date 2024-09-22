@@ -39,13 +39,16 @@ texture_scale = 3.0
 
 [node name="Player" parent="." instance=ExtResource("3")]
 position = Vector2(150, 84)
+motion_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 texture_filter = 1
 script = ExtResource("6_1ce3y")
 
-[node name="Knight" parent="." instance=ExtResource("4")]
+[node name="AiFighter" parent="." instance=ExtResource("4")]
 position = Vector2(-134, 17)
+motion_mode = 0
+script = null
 
 [node name="BoomBox" parent="." instance=ExtResource("6_6lfbx")]
 

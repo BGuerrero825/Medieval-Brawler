@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+enum INPUT{NONE, LPRESS, LRELEASE, RPRESS, RRELEASE} # player actions
+enum STATE{IDLE, WINDUP, LIGHT, PARRY} # state
+
+var bcon = null # beatController
+
 #movement constants
 @export var MAX_SPEED := 100.0
 @export var ACCELERATION := 500.0
@@ -10,11 +15,16 @@ var movement_allowed = true
 var input_vector := Vector2(0,0)
 var counter := 0.0
 var rotation_dir := 0
+var state = IDLE
+var queuedAction := ""
 
 @onready var animator = $AnimationPlayer
 
 func _ready():
+	if $controller.isPlayer():
+		Global.setPlayer(self)
 	animator.play("idle")
+	bcon = Global.beatController
 	
 func _process(delta):
 	# rotate player based on mouse location
@@ -52,23 +62,47 @@ func movement_processing(delta):
 			velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
-# performs actions based on "just_pressed" inputs
+
+# performs actions based on inputs
 func action_processing():
-	var action = $controller.get_action_input()
-	if(action == "ready"):
-		animator.play("ready")
-		velocity = velocity * 0.9
-	elif(action == "swing"):
-		animator.play("swing")
+	var input = $controller.get_input()
+	# IDLE
+	if state == STATE.IDLE:
+		if(input == INPUT.LPRESS):
+			queueAction("windup") #change this to be enum
+	# WINDUP
+	elif state == STATE.WINDUP:
+		if(input == INPUT.LRELEASE):
+			queueAction("light")
+
+ #################################################### START HERHE
+
+
+	elif(action == "release"):
+		queueAction("light")
+		#animator.play("light")
 	elif(action == "parry"):
-		animator.play("parry")
-		velocity = velocity * 0.9
+		pass
+		#animator.play("parry")
+		#velocity = velocity * 0.9
 	else:
 		animator.play()
 		animator.queue("idle")
 	
+func queueAction(action: String):
+	queuedAction = action
 		
+func executeAction():
+	if (queuedAction == "windup"):
+		animator.play("RESET")
+		animator.play("windup")
+		velocity = velocity * 0.9
+	elif (queuedAction == "release"):
+		animator.play("RESET")
+		animator.play("light")
+	queuedAction = ""
+		
+
 func debug_output():
 	#print("\n", self.get_name())
 	#print("pivot: ", $pivot.rotation)

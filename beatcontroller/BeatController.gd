@@ -5,7 +5,7 @@ const CORE_BPM = 160
 var gui = null
 var boomBox = null
 
-var time := 0.0
+var timeOnBeat := 0.0
 var bpm := 160.0
 var beatCadence := 60.0 / bpm 
 var beatCount := 0 
@@ -18,12 +18,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# update global beat and dependent systems when enough time elapses
-	time += delta
-	if time > beatCadence:
-		time -= beatCadence
+	timeOnBeat += delta
+	if timeOnBeat > beatCadence:
+		# reset timeOnBeat to time past beatCadence that just occurred
+		timeOnBeat -= beatCadence
+		beatCadence = 60.0 / bpm
 		beatCount += 1 
-		self.update()
-		print(beatCount)
+		update()
+		#print(beatCount)
 
 # triggers beat dependent actions
 func update():
@@ -31,6 +33,8 @@ func update():
 		gui.pulse()
 	if boomBox:
 		boomBox.sync()
+	if Global.player:
+		Global.player.executeAction()
 
 func setGui(newGui):
 	gui = newGui 
@@ -42,7 +46,6 @@ func setBoomBox(newBoomBox):
 
 func setBpm(newBpm: float):
 	bpm = newBpm
-	beatCadence = 60.0 / newBpm
 
 func _on_h_slider_value_changed(value:float):
 	setBpm(CORE_BPM + value)

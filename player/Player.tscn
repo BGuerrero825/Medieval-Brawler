@@ -7,3 +7,7 @@
 
 [node name="controller" parent="." index="0"]
 script = ExtResource("4")
+
+[node name="swing" parent="pivot/animations" index="1"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-29, -3.14594e-05)

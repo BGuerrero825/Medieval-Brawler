@@ -28,3 +28,5 @@ func get_action_input():
 		action = "idle"
 	return action
 	
+func isPlayer():
+	return false

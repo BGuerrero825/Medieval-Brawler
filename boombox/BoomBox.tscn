@@ -1,30 +1,30 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8xbq10drbqeg"]
 
-[ext_resource type="AudioStream" uid="uid://70p6oaassfrl" path="res://musictracks/openhat-808.ogg" id="1_6q55v"]
 [ext_resource type="Script" path="res://boombox/BoomBox.gd" id="1_y83iv"]
-[ext_resource type="AudioStream" uid="uid://b1anrd8whwsok" path="res://musictracks/kick-classic.ogg" id="2_l47en"]
-[ext_resource type="AudioStream" uid="uid://uh4k202mnpun" path="res://musictracks/hihat-808_down.ogg" id="2_ofp42"]
-[ext_resource type="AudioStream" uid="uid://ciu4n2lbquviv" path="res://musictracks/snare-808_base.ogg" id="3_glc6b"]
-[ext_resource type="AudioStream" uid="uid://c2x03dq5t7fwy" path="res://musictracks/hihat-digital_up.ogg" id="4_rn532"]
-[ext_resource type="AudioStream" uid="uid://bbiv2g4us2121" path="res://musictracks/snare-808_flare.ogg" id="5_qekl3"]
+[ext_resource type="AudioStream" uid="uid://uh4k202mnpun" path="res://musictracks/hihat-808_down.ogg" id="2_6n0be"]
+[ext_resource type="AudioStream" uid="uid://70p6oaassfrl" path="res://musictracks/openhat-808.ogg" id="3_6velw"]
+[ext_resource type="AudioStream" uid="uid://b1anrd8whwsok" path="res://musictracks/kick-classic.ogg" id="4_xjeog"]
+[ext_resource type="AudioStream" uid="uid://ciu4n2lbquviv" path="res://musictracks/snare-808_base.ogg" id="5_dn8x4"]
+[ext_resource type="AudioStream" uid="uid://c2x03dq5t7fwy" path="res://musictracks/hihat-digital_up.ogg" id="6_p0b2k"]
+[ext_resource type="AudioStream" uid="uid://bbiv2g4us2121" path="res://musictracks/snare-808_flare.ogg" id="7_dqw1l"]
 
 [node name="BoomBox" type="Node2D"]
 script = ExtResource("1_y83iv")
 
 [node name="HihatDown" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_ofp42")
+stream = ExtResource("2_6n0be")
 
 [node name="Openhat" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1_6q55v")
+stream = ExtResource("3_6velw")
 
 [node name="Kick" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_l47en")
+stream = ExtResource("4_xjeog")
 
 [node name="SnareBase" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_glc6b")
+stream = ExtResource("5_dn8x4")
 
 [node name="HihatUp" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_rn532")
+stream = ExtResource("6_p0b2k")
 
 [node name="SnareFlare" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_qekl3")
+stream = ExtResource("7_dqw1l")

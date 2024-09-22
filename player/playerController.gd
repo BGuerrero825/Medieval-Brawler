@@ -1,10 +1,10 @@
 # input processing control for player, attached to "controller" node
 extends Node2D
 
-var action
+var fighter = null
 
 func _ready():
-	Global.setPlayer(self)
+	fighter = get_parent()
 
 func get_orientation_target():
 	return get_global_mouse_position()
@@ -15,13 +15,16 @@ func get_input_vector():
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	return input_vector.normalized()
 	
-func get_action_input():
-	action = "idle"
+func get_input():
+	var input = fighter.INPUT.NONE
 	if(Input.is_action_pressed("left_mouse")):
-		action = "ready"
+		input = fighter.INPUT.LPRESS	
 	elif(Input.is_action_just_released("left_mouse")):
-		action = "swing"
+		input = fighter.INPUT.LRELEASE
 	elif(Input.is_action_pressed("right_mouse")):
-		action = "parry"
-	return action
+		input = fighter.INPUT.RPRESS
+	return input 
+
+func isPlayer():
+	return true
 	

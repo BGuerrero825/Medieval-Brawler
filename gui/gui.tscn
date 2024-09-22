@@ -28,12 +28,12 @@ _data = {
 script = ExtResource("1_o3bq1")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_left = 166.0
-offset_top = 9.0
-offset_right = 216.0
-offset_bottom = 29.0
-min_value = -50.0
-max_value = 50.0
+offset_left = 71.0
+offset_top = 10.0
+offset_right = 171.0
+offset_bottom = 30.0
+min_value = -100.0
+rounded = true
 ticks_on_borders = true
 
 [node name="BeatMarker" type="TextureRect" parent="."]
