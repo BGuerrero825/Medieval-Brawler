@@ -1,6 +1,7 @@
 extends Node2D
 
 const CORE_BPM = 160
+const BEAT_WINDOW = .15 # percentage of time after a beat where input will be processed for that beat 
 
 var gui = null
 var boomBox = null
@@ -9,6 +10,7 @@ var timeOnBeat := 0.0
 var bpm := 160.0
 var beatCadence := 60.0 / bpm 
 var beatCount := 0 
+var inBeatWindow := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,11 +21,17 @@ func _ready():
 func _process(delta):
 	# update global beat and dependent systems when enough time elapses
 	timeOnBeat += delta
+	# executes when falling out of the beat "grace" window
+	if timeOnBeat > BEAT_WINDOW * beatCadence:
+		inBeatWindow = false
+	# executes on the soonest frame after which a beat occurs
 	if timeOnBeat > beatCadence:
 		# reset timeOnBeat to time past beatCadence that just occurred
 		timeOnBeat -= beatCadence
+		# update beatCadence now if game bpm has changed
 		beatCadence = 60.0 / bpm
 		beatCount += 1 
+		inBeatWindow = true
 		update()
 		#print(beatCount)
 
@@ -34,7 +42,7 @@ func update():
 	if boomBox:
 		boomBox.sync()
 	if Global.player:
-		Global.player.executeAction()
+		Global.player.updateState()
 
 func setGui(newGui):
 	gui = newGui 
