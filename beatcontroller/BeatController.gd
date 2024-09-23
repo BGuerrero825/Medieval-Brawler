@@ -1,7 +1,7 @@
 extends Node2D
 
 const CORE_BPM = 160
-const BEAT_WINDOW = .15 # percentage of time after a beat where input will be processed for that beat 
+const BEAT_WINDOW = .2 # percentage of time after a beat where input will be processed for that beat 
 
 var gui = null
 var boomBox = null
@@ -12,10 +12,12 @@ var beatCadence := 60.0 / bpm
 var beatCount := 0 
 var inBeatWindow := false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# must be placed higher in node tree so that it loads before its dependent nodes
 	Global.setBeatController(self)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -35,25 +37,29 @@ func _process(delta):
 		update()
 		#print(beatCount)
 
+
 # triggers beat dependent actions
 func update():
 	if gui:
 		gui.pulse()
 	if boomBox:
 		boomBox.sync()
-	if Global.player:
-		Global.player.updateState()
+
 
 func setGui(newGui):
 	gui = newGui 
 	var slider = gui.get_node("HSlider")
 	slider.value_changed.connect(_on_h_slider_value_changed)
 
+
 func setBoomBox(newBoomBox):
 	boomBox = newBoomBox
 
+
 func setBpm(newBpm: float):
 	bpm = newBpm
+
+
 
 func _on_h_slider_value_changed(value:float):
 	setBpm(CORE_BPM + value)

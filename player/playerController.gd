@@ -17,7 +17,7 @@ func get_input_vector():
 	
 func get_input():
 	var input = fighter.INPUT.NONE
-	if(Input.is_action_pressed("left_mouse")):
+	if(Input.is_action_just_pressed("left_mouse")):
 		input = fighter.INPUT.LPRESS	
 	elif(Input.is_action_just_released("left_mouse")):
 		input = fighter.INPUT.LRELEASE
