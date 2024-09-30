@@ -8,8 +8,8 @@ func _ready():
 	Global.beatController.setBoomBox(self)
 	$HihatDown.play()
 	$Openhat.play()
-	$Kick.play()
-	$SnareBase.play()
+	# $Kick.play()
+	# $SnareBase.play()
 	$HihatUp.play()
 	pass # Replace with function body.
 

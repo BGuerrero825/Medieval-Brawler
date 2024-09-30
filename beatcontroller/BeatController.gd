@@ -1,7 +1,7 @@
 extends Node2D
 
 const CORE_BPM = 160
-const BEAT_WINDOW = .2 # percentage of time after a beat where input will be processed for that beat 
+const BEAT_WINDOW = .25 # percentage of beatCadence time after beat in which inputs will still be processed 
 
 var gui = null
 var boomBox = null

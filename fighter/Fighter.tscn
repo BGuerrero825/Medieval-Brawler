@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt1nkv6r851nn"]
+[gd_scene load_steps=18 format=3 uid="uid://dt1nkv6r851nn"]
 
 [ext_resource type="Texture2D" uid="uid://dedbthaioib8n" path="res://character_assets/pointer.png" id="2_r3um7"]
 [ext_resource type="Texture2D" uid="uid://dqmjyyeapt6hv" path="res://character_assets/shoulders.png" id="3_1dbd7"]
@@ -931,8 +931,6 @@ _data = {
 "windup": SubResource("Animation_07v75")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="11"]
-
 [node name="Fighter" type="CharacterBody2D"]
 texture_filter = 1
 motion_mode = 1
@@ -946,7 +944,8 @@ script = ExtResource("4")
 rotation = -1.5708
 
 [node name="animations" type="Node2D" parent="pivot"]
-rotation = -3.14159
+rotation = 3.14159
+scale = Vector2(1, -1)
 
 [node name="chest" type="Sprite2D" parent="pivot/animations"]
 position = Vector2(2, 5.96046e-08)
@@ -1024,10 +1023,3 @@ shape = SubResource("1")
 libraries = {
 "": SubResource("AnimationLibrary_qew0s")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qew0s")
-}
-tree_root = SubResource("11")
-anim_player = NodePath("../AnimationPlayer")
