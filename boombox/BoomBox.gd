@@ -6,11 +6,12 @@ var bcon
 func _ready():
 	bcon = Global.beatController
 	Global.beatController.setBoomBox(self)
-	$HihatDown.play()
-	$Openhat.play()
-	# $Kick.play()
-	# $SnareBase.play()
-	$HihatUp.play()
+	$HihatDown.play()	# down beat
+	$Openhat.play()		# "sizzle"
+	#$HihatUp.play()		# up beat
+	
+	#$Kick.play()
+	$SnareBase.play()
 	pass # Replace with function body.
 
 
@@ -19,7 +20,7 @@ func _process(_delta):
 	pass
 
 func sync():
-	var newScale = bcon.bpm / bcon.CORE_BPM 
+	var newScale = bcon.bpm / bcon.CORE_BPM 	# new pitch scale = new BPM / original BPM (160). Ex: 120 / 160 = 0.75
 	$HihatDown.pitch_scale = newScale
 	$Openhat.pitch_scale = newScale
 	$Kick.pitch_scale = newScale

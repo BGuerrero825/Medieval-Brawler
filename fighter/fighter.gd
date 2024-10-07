@@ -52,12 +52,11 @@ func _process(delta):
 		queueState(desiredState)
 
 	if bcon.inBeatWindow and queuedState != STATE.IDLE and !updatingState:
-		print(">>>>> UPDATED STATE FROM QUEUE :: ", queuedState)
 		desiredState = queuedState
 		updateState()
 
 	if ((bcon.inBeatWindow and desiredState != state) and !updatingState):
-		print(">>>>> CURRENT :: ", state, "  |  DESIRED :: ", desiredState)
+		#print(">>>>> CURRENT :: ", state, "  |  DESIRED :: ", desiredState)
 		updateState()
 	if not bcon.inBeatWindow:
 		updatingState = false
@@ -86,7 +85,12 @@ func movementProcessing(delta):
 # processes user input / state transitions
 func inputProcessing():
 	var input = $controller.get_input()
-	# STATE TRANSITION LOGIC
+	if input == INPUT.LPRESS:
+		if bcon.timeOnBeat < bcon.beatCadence / 2:
+			print(bcon.timeOnBeat, " sec LATE")
+		else:
+			print(bcon.beatCadence - bcon.timeOnBeat, " sec EARLY")
+	# STATE TRANSITION LOGIiC
 	desiredState = STATE.IDLE 	# assume character wants to do nothing next
 	# IDLE
 	if state == STATE.IDLE:
@@ -98,7 +102,7 @@ func inputProcessing():
 	# LIGHT
 	elif state == STATE.LIGHT:
 		if input == INPUT.LPRESS:
-			print("got lpress while swinging")
+			#print("got lpress while swinging")
 			desiredState = STATE.WINDUP 
 		
 
@@ -121,7 +125,7 @@ func updateState():
 		animator.play("RESET")
 		animator.play("light")
 
-	print(">>>>> CHANGED TO :: ", state)
+	#print(">>>>> CHANGED TO :: ", state)
 	
 
 func queueState(newState: STATE):
@@ -129,13 +133,13 @@ func queueState(newState: STATE):
 	if newState == queuedState:
 		return
 	queuedState = newState
-	print(">>>>> QUEUED :: ", queuedState)
+	#print(">>>>> QUEUED :: ", queuedState)
 
 
 func clearQueue():
 	queuedState = STATE.IDLE
 	queueTimer = 0
-	print("queue CLEARED!@!!!!")
+	#print("queue CLEARED!@!!!!")
 
 func debug_output():
 	#print("\n", self.get_name())

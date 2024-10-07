@@ -16,12 +16,15 @@ stream = ExtResource("2_6n0be")
 
 [node name="Openhat" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6velw")
+volume_db = -5.0
 
 [node name="Kick" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_xjeog")
+volume_db = -5.0
 
 [node name="SnareBase" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_dn8x4")
+volume_db = -5.0
 
 [node name="HihatUp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_p0b2k")
