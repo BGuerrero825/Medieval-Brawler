@@ -1,14 +1,14 @@
 extends Node2D
 
 const CORE_BPM = 160
-const BEAT_WINDOW = .25 # percentage of beatCadence time after beat in which inputs will still be processed 
+const BEAT_WINDOW = .25 # as a percentage of the beatSeconds time (ex .375sec * .25 before & after beat)  
 
 var gui = null
 var boomBox = null
 
 var timeOnBeat := 0.0
 var bpm := 160.0
-var beatCadence := 60.0 / bpm 
+var beatSeconds := 60.0 / bpm 
 var beatCount := 0 
 var inBeatWindow := false
 
@@ -23,27 +23,35 @@ func _ready():
 func _process(delta):
 	# update global beat and dependent systems when enough time elapses
 	timeOnBeat += delta
-	# executes when falling out of the beat "grace" window
-	if timeOnBeat > BEAT_WINDOW * beatCadence:
-		inBeatWindow = false
-	# executes on the soonest frame after which a beat occurs
-	if timeOnBeat > beatCadence:
-		# reset timeOnBeat to time past beatCadence that just occurred
-		timeOnBeat -= beatCadence
-		# update beatCadence now if game bpm has changed
-		beatCadence = 60.0 / bpm
-		beatCount += 1 
+	# enter pre-beat window
+	if !inBeatWindow and beatSeconds - timeOnBeat < beatSeconds * BEAT_WINDOW:
 		inBeatWindow = true
-		update()
+	# exit post-beat window
+	elif inBeatWindow and timeOnBeat > beatSeconds * BEAT_WINDOW:
+		inBeatWindow = false
+	
+	# execute beat triggered actions
+	if timeOnBeat > beatSeconds:
+		# reset timeOnBeat to time past beatSeconds that just occurred
+		timeOnBeat -= beatSeconds
+		# update beatSeconds now if game bpm has changed
+		updateBeat()
+		updateGui()
 		#print(beatCount)
 
 
 # triggers beat dependent actions
-func update():
+func updateGui():
 	if gui:
 		gui.pulse()
 	if boomBox:
 		boomBox.sync()
+
+
+func updateBeat():
+	beatSeconds = 60.0 / bpm
+	beatCount += 1 
+	inBeatWindow = true
 
 
 func setGui(newGui):
