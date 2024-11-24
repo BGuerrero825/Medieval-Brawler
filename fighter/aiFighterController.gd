@@ -1,10 +1,11 @@
 extends Node2D
 
-var player = null
+@onready var fighter = get_parent()
+@onready var player = Global.player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = Global.player
+	pass
 	
 func get_orientation_target():
 	return player.position
@@ -16,17 +17,15 @@ func get_input_vector():
 		input_vector = player.global_position - global_position
 	return input_vector.normalized()
 	
-func get_action_input():
-	var action
-	if(Input.is_action_pressed("left_mouse")):
-		action = "ready"
+func get_input():
+	var input = fighter.INPUT.NONE
+	if(Input.is_action_just_pressed("left_mouse")):
+		input = fighter.INPUT.LPRESS	
 	elif(Input.is_action_just_released("left_mouse")):
-		action = "parry"
+		input = fighter.INPUT.LRELEASE
 	elif(Input.is_action_pressed("right_mouse")):
-		action = "swing"
-	else:
-		action = "idle"
-	return action
+		input = fighter.INPUT.RPRESS
+	return input 
 	
 func isPlayer():
 	return false

@@ -16,7 +16,7 @@ stream = ExtResource("2_6n0be")
 
 [node name="Openhat" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6velw")
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="Kick" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_xjeog")
@@ -31,3 +31,4 @@ stream = ExtResource("6_p0b2k")
 
 [node name="SnareFlare" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_dqw1l")
+volume_db = -5.0

@@ -1,7 +1,7 @@
 extends Node
 
 var player = null
-var beatController = null
+var boomBox = null # BoomBox node reference
 var entities = []
 
 func _process(_delta):
@@ -10,8 +10,8 @@ func _process(_delta):
 func setPlayer(newPlayer):
 	player = newPlayer
 
-func setBeatController(newBeatController):
-	beatController = newBeatController
+func setBoomBox(newBoomBox):
+	boomBox = newBoomBox
 
 func addEntity(newEntity):
 	entities.append(newEntity)

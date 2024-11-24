@@ -1,10 +1,10 @@
 # input processing control for player, attached to "controller" node
 extends Node2D
 
-var fighter = null
+@onready var fighter = get_parent()
 
 func _ready():
-	fighter = get_parent()
+	pass
 
 func get_orientation_target():
 	return get_global_mouse_position()

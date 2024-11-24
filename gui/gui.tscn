@@ -48,4 +48,7 @@ texture_filter = 1
 position = Vector2(271, 35)
 texture = ExtResource("2_rcw45")
 hframes = 8
-frame = 2
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

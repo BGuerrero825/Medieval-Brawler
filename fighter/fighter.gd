@@ -22,15 +22,21 @@ var updatingState := false
 var queueTimer := 0.0
 
 @onready var animator = $AnimationPlayer
-@onready var bcon = Global.beatController
+@onready var bb = Global.boomBox
 
 func _ready():
+	if not $controller.get_script():
+		return
 	if $controller.isPlayer():
 		Global.setPlayer(self)
 	Global.addEntity(self)
 	animator.play("idle")
 	
-func _process(delta):
+func _physics_process(delta):
+	if bb.onBeatFrame:
+		print(get_node(get_path()).name, " received onBeatFrame (", bb.beatCount, ")")
+	if not $controller.get_script():
+		return
 	# rotate player based on mouse location
 	orientationProcessing()
 	# determine velocity based on 4 directional user inputs
@@ -42,14 +48,14 @@ func _process(delta):
 	# processes user input / state transitions
 	inputProcessing()
 
-	if bcon.inBeatWindow and queuedState != STATE.IDLE and !updatingState:
+	if bb.inBeatWindow and queuedState != STATE.IDLE and !updatingState:
 		desiredState = queuedState
 		updateState()
 
-	if ((bcon.inBeatWindow and desiredState != state) and !updatingState):
+	if ((bb.inBeatWindow and desiredState != state) and !updatingState):
 		#print(">>>>> CURRENT :: ", state, "  |  DESIRED :: ", desiredState)
 		updateState()
-	if not bcon.inBeatWindow:
+	if not bb.inBeatWindow:
 		updatingState = false
 
 
@@ -58,10 +64,10 @@ func inputProcessing():
 	var input = $controller.get_input()
 	# early / late debug print
 	if input == INPUT.LPRESS:
-		if bcon.timeOnBeat < bcon.beatCadence / 2:
-			print(bcon.timeOnBeat, " sec LATE")
+		if bb.timeOnBeat < bb.beatLength / 2:
+			print("%.0fms LATE (+%.0f%%)" % [bb.timeOnBeat * 1000, (bb.timeOnBeat / bb.beatLength) * 100])
 		else:
-			print(bcon.beatCadence - bcon.timeOnBeat, " sec EARLY")
+			print("%.0fms EARLY (-%.0f%%)" % [(bb.beatLength - bb.timeOnBeat) * 1000, (1 - (bb.timeOnBeat / bb.beatLength)) * 100])
 	# STATE TRANSITION LOGIC
 	desiredState = STATE.IDLE 	# assume character wants to do nothing next
 	# IDLE

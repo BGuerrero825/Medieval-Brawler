@@ -7,14 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://blltoklscxbvc" path="res://fighter/aiFighter.tscn" id="4"]
 [ext_resource type="Script" path="res://player/playerCamera.gd" id="6_1ce3y"]
 [ext_resource type="PackedScene" uid="uid://b8xbq10drbqeg" path="res://boombox/BoomBox.tscn" id="6_6lfbx"]
-[ext_resource type="Script" path="res://beatcontroller/BeatController.gd" id="8_2xliu"]
 [ext_resource type="PackedScene" uid="uid://bhyrj6sq576c6" path="res://gui/gui.tscn" id="9_nl12s"]
+[ext_resource type="PackedScene" uid="uid://dt1nkv6r851nn" path="res://fighter/Fighter.tscn" id="9_s267n"]
 
 [node name="base" type="Node2D"]
 texture_filter = 1
 
-[node name="BeatController" type="Node2D" parent="."]
-script = ExtResource("8_2xliu")
+[node name="BoomBox" parent="." instance=ExtResource("6_6lfbx")]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(100, 100)
@@ -45,11 +44,8 @@ motion_mode = 0
 texture_filter = 1
 script = ExtResource("6_1ce3y")
 
-[node name="AiFighter" parent="." instance=ExtResource("4")]
-position = Vector2(-134, 17)
-motion_mode = 0
-script = null
-
-[node name="BoomBox" parent="." instance=ExtResource("6_6lfbx")]
-
 [node name="CanvasLayer" parent="." instance=ExtResource("9_nl12s")]
+
+[node name="Fighter" parent="." instance=ExtResource("9_s267n")]
+
+[node name="AIFighter" parent="." instance=ExtResource("4")]
