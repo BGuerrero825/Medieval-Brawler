@@ -33,8 +33,6 @@ func _ready():
 	animator.play("idle")
 	
 func _physics_process(delta):
-	if bb.onBeatFrame:
-		print(get_node(get_path()).name, " received onBeatFrame (", bb.beatCount, ")")
 	if not $controller.get_script():
 		return
 	# rotate player based on mouse location
@@ -44,65 +42,52 @@ func _physics_process(delta):
 	# move player
 	set_velocity(velocity)
 	move_and_slide()
-
 	# processes user input / state transitions
-	inputProcessing()
-
-	if bb.inBeatWindow and queuedState != STATE.IDLE and !updatingState:
-		desiredState = queuedState
-		updateState()
-
-	if ((bb.inBeatWindow and desiredState != state) and !updatingState):
-		#print(">>>>> CURRENT :: ", state, "  |  DESIRED :: ", desiredState)
-		updateState()
-	if not bb.inBeatWindow:
-		updatingState = false
+	updateState()
 
 
-# processes user input / state transitions
-func inputProcessing():
+# change state of character based on desiredState 
+# TODO: move to a proper state machine
+func updateState():
 	var input = $controller.get_input()
+
+	if bb.onBeatFrame:
+		state = queuedState
+		if state == STATE.WINDUP:
+			queuedState = STATE.IDLE
+		if state == STATE.LIGHT:
+			animator.play("RESET")
+			animator.play("light")
+			queuedState = STATE.IDLE
+
+	if state == STATE.IDLE:
+		animator.play("RESET")
+		animator.play("idle")
+		if input == INPUT.LPRESS:
+			state = STATE.WINDUP
+			if bb.inBeatWindow:
+				print("IN BEAT WINDOW!!!")
+				queuedState = STATE.WINDUP
+			else: 
+				queuedState = STATE.IDLE
+			animator.play("RESET")
+			animator.play("windup")
+
+	elif state == STATE.WINDUP:
+		if input == INPUT.LPRESS:
+			queuedState = STATE.LIGHT
+			print("queued state is: %d" % queuedState)
+
+	elif state == STATE.LIGHT:
+		pass
+
+		
 	# early / late debug print
 	if input == INPUT.LPRESS:
 		if bb.timeOnBeat < bb.beatLength / 2:
 			print("%.0fms LATE (+%.0f%%)" % [bb.timeOnBeat * 1000, (bb.timeOnBeat / bb.beatLength) * 100])
 		else:
 			print("%.0fms EARLY (-%.0f%%)" % [(bb.beatLength - bb.timeOnBeat) * 1000, (1 - (bb.timeOnBeat / bb.beatLength)) * 100])
-	# STATE TRANSITION LOGIC
-	desiredState = STATE.IDLE 	# assume character wants to do nothing next
-	# IDLE
-	if state == STATE.IDLE:
-		if input == INPUT.LPRESS:
-			desiredState = STATE.WINDUP 
-	# WINDUP
-	elif state == STATE.WINDUP:
-		desiredState = STATE.LIGHT
-	# LIGHT
-	elif state == STATE.LIGHT:
-		if input == INPUT.LPRESS:
-			#print("got lpress while swinging")
-			desiredState = STATE.WINDUP 
-		
-
-# change state of character based on desiredState 
-func updateState():
-	if desiredState == state:
-		return
-	if (desiredState == STATE.IDLE):
-		state = STATE.IDLE
-		animator.play("RESET")
-		animator.play("idle")
-	elif (desiredState == STATE.WINDUP):
-		state = STATE.WINDUP
-		animator.play("RESET")
-		animator.play("windup")
-		#velocity = velocity * 0.9
-	elif (desiredState == STATE.LIGHT):
-		state = STATE.LIGHT
-		animator.play("RESET")
-		animator.play("light")
-
-	#print(">>>>> CHANGED TO :: ", state)
 
 
 func orientationProcessing():

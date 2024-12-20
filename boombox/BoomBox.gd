@@ -35,27 +35,32 @@ func _physics_process(delta):
 	else:
 		onBeatFrame = false
 	# beginning of beat window
-	if !inBeatWindow and beatLength - timeOnBeat < beatLength * BEAT_WINDOW:
+	if !inBeatWindow and beatLength - timeOnBeat <= beatLength * BEAT_WINDOW:
 		inBeatWindow = true
+		print("beatwindow start!")
+		print("%.0fms EARLY (-%.0f%%)" % [(beatLength - timeOnBeat) * 1000, (1 - (timeOnBeat / beatLength)) * 100])
 	# end of beat window
 	elif inBeatWindow and timeOnBeat > beatLength * BEAT_WINDOW:
 		inBeatWindow = false
+		print("beatwindow end!")
+		print("%.0fms LATE (+%.0f%%)" % [bb.timeOnBeat * 1000, (bb.timeOnBeat / bb.beatLength) * 100])
 	
 
 func hitBeat():
 	onBeatFrame = true
 	# reset timeOnBeat to time past beatLength that just occurred
+	timeOnBeat -= beatLength
 	beatLength = 60.0 / bpm
+	# print("Beat #%d" % beatCount)
 	beatCount += 1 
-	print(get_node(get_path()).name, " received onBeatFrame (", beatCount, ")")
 
 
 func syncWithBpm():
 	var newScale = bpm / CORE_BPM 	# new pitch scale = new BPM / original BPM (160). Ex: 120 / 160 = 0.75
-	timeOnBeat -= beatLength
 	for track in musicTracks:
 		track.pitch_scale = newScale
 
 
 func setBpm(newBpm: int):
 	bpm = newBpm
+	print("BPM: %d,  beatLength: %.03f" % [bpm, 60.0/bpm])

@@ -935,6 +935,11 @@ _data = {
 texture_filter = 1
 motion_mode = 1
 script = ExtResource("4")
+MAX_SPEED = null
+ACCELERATION = null
+FRICTION = null
+ROTATION_SPEED = null
+QUEUE_TIMEOUT = null
 
 [node name="controller" type="Node2D" parent="."]
 

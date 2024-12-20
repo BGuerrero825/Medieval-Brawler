@@ -18,14 +18,7 @@ func get_input_vector():
 	return input_vector.normalized()
 	
 func get_input():
-	var input = fighter.INPUT.NONE
-	if(Input.is_action_just_pressed("left_mouse")):
-		input = fighter.INPUT.LPRESS	
-	elif(Input.is_action_just_released("left_mouse")):
-		input = fighter.INPUT.LRELEASE
-	elif(Input.is_action_pressed("right_mouse")):
-		input = fighter.INPUT.RPRESS
-	return input 
+	return fighter.INPUT.NONE
 	
 func isPlayer():
 	return false
