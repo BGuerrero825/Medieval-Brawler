@@ -31,6 +31,7 @@ func _ready():
 		Global.setPlayer(self)
 	Global.addEntity(self)
 	animator.play("idle")
+
 	
 func _physics_process(delta):
 	if not $controller.get_script():
@@ -57,7 +58,7 @@ func updateState():
 			queuedState = STATE.IDLE
 		if state == STATE.LIGHT:
 			animator.play("RESET")
-			animator.play("light")
+			animator.play("sweep")
 			queuedState = STATE.IDLE
 
 	if state == STATE.IDLE:
@@ -85,7 +86,7 @@ func updateState():
 	# early / late debug print
 	if input == INPUT.LPRESS:
 		if bb.timeOnBeat < bb.beatLength / 2:
-			print("%.0fms LATE (+%.0f%%)" % [bb.timeOnBeat * 1000, (bb.timeOnBeat / bb.beatLength) * 100])
+			print("%.0fms LATE (%.0f%%)" % [bb.timeOnBeat * 1000, (bb.timeOnBeat / bb.beatLength) * 100])
 		else:
 			print("%.0fms EARLY (-%.0f%%)" % [(bb.beatLength - bb.timeOnBeat) * 1000, (1 - (bb.timeOnBeat / bb.beatLength)) * 100])
 
