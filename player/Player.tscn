@@ -4,11 +4,6 @@
 [ext_resource type="Script" path="res://player/playerController.gd" id="4"]
 
 [node name="Fighter" instance=ExtResource("1_hxs2o")]
-MAX_SPEED = null
-ACCELERATION = null
-FRICTION = null
-ROTATION_SPEED = null
-QUEUE_TIMEOUT = null
 
 [node name="controller" parent="." index="0"]
 script = ExtResource("4")

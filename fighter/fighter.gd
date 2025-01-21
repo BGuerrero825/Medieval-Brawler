@@ -16,13 +16,8 @@ enum STATE {IDLE, WINDUP, SWEEP, THRUST, PARRY} # character state
 var movable = true
 var input := 0
 var inputVector := Vector2(0,0)
-var counter := 0.0
-var rotationDir := 0
 var state := STATE.IDLE
-var desiredState := STATE.IDLE
 var queuedState := STATE.IDLE
-var updatingState := false
-var queueTimer := 0.0
 
 
 @onready var animator = $AnimationPlayer
@@ -47,66 +42,30 @@ func _physics_process(delta):
 	move_and_slide()
 	
 
-# change state of character based on desiredState 
-# TODO: move to a proper state machine
+# change state of character based on inputs and environment 
 func processState():
 	input = $controller.get_input()
 	var entry = false
 	
-	if input == IN.NONE and !bb.onBeatFrame:
-		return
-
 	if bb.onBeatFrame:
 		if state != queuedState:
-			animator.play("RESET")
+			entry = true
 		state = queuedState
-		entry = true
+		# queuedState = STATE.IDLE
 
 	match state:
 		STATE.IDLE:
-			# _idle()
-			if entry:
-				animator.queue("idle")
-			if input == IN.ATTACK1:
-				state = STATE.WINDUP
-				if bb.inBeatWindow:
-					print("IN BEAT WINDOW!!!")
-					queuedState = STATE.WINDUP
-				else: 
-					queuedState = STATE.IDLE
-				animator.play("RESET")
-				animator.queue("windup")
-
+			idle(entry)
 		STATE.WINDUP:
-			# _windup()
-			if bb.onBeatFrame:
-				queuedState = STATE.IDLE
-			if input == IN.ATTACK1:
-				queuedState = STATE.SWEEP
-				print("queued state is: %d" % queuedState)
-			if input == IN.ATTACK2:
-				queuedState = STATE.THRUST
-			
+			windup(entry)
 		STATE.SWEEP:
-			# _sweep()		
-			if entry:
-				playAnim("sweep")
-				queuedState = STATE.IDLE
-
+			sweep(entry)
 		STATE.THRUST:
-			# _thrust()
-			if entry:
-				animator.play("RESET")
-				animator.play("thrust")
-				queuedState = STATE.IDLE
-
+			thrust(entry)
 		_:
 			print("Unknown state %d" % state)
-			pass
 
-	# early / late debug print
-	debugBeatTiming()
-
+	debugBeatTiming() # early / late debug print
 	#debugOutput()
 
 
@@ -130,10 +89,48 @@ func processMovement(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 
+func idle(entry: bool = false) -> void: 
+	if entry:
+		playAnim("idle")
+		queuedState = STATE.IDLE
+	# Input processing
+	if input == IN.ATTACK1:
+		state = STATE.WINDUP
+		if bb.inBeatWindow:
+			print("HIT IN BEAT WINDOW")
+			queuedState = STATE.WINDUP
+		else: 
+			queuedState = STATE.IDLE
+		playAnim("windup")
+
+func windup(entry: bool = false) -> void: 
+	if entry:
+		playAnim("windup")
+		queuedState = STATE.IDLE
+	# Input processing
+	if input == IN.ATTACK1:
+		queuedState = STATE.SWEEP
+	if input == IN.ATTACK2:
+		queuedState = STATE.THRUST
+
+func sweep(entry: bool = false) -> void: 
+	if entry:
+		playAnim("sweep")
+		queuedState = STATE.IDLE
+	# Input processing
+	pass
+
+func thrust(entry: bool = false) -> void: 
+	if entry:
+		playAnim("thrust")
+		queuedState = STATE.IDLE
+	# Input processing
+	pass
+
+
 func playAnim(animName: String = "RESET") -> void:
 	animator.play("RESET")
 	animator.advance(0.0)
-	animator.is_playing()
 	animator.play(animName)
 
 

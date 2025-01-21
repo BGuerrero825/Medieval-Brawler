@@ -26,7 +26,7 @@ func _ready():
 	for track in musicTracks:
 		track.play()
 	beatCount = 1
-	syncWithBpm()
+	syncMusicWithBpm()
 
 
 func _physics_process(delta):
@@ -34,8 +34,8 @@ func _physics_process(delta):
 	timeOnBeat += delta
 	# on beat frame
 	if timeOnBeat > beatLength:
-		hitBeat()
-		syncWithBpm()
+		updateBeat()
+		syncMusicWithBpm()
 	# beginning of beat window
 	if !inBeatWindow and (timeOnBeat >= beatLength - beatLength * BEAT_WINDOW):
 		inBeatWindow = true
@@ -46,23 +46,23 @@ func _physics_process(delta):
 		#print("beatwindow end! %.0fms LATE (%.0f%%)" % [timeOnBeat * 1000, (timeOnBeat / beatLength) * 100])
 	
 
-func hitBeat():
+func updateBeat():
 	onBeatFrame = true
-	# set timeOnBeat to time past beatLength that just occurred
-	timeOnBeat -= beatLength
+	timeOnBeat -= beatLength # set timeOnBeat to time past beatLength that just occurred
 	beatLength = 60.0 / bpm
 	# print("Beat #%d" % beatCount)
 	beatCount += 1 
 
 
 # call this only on the beat frame, otherwise it will result in desync
-func syncWithBpm():
-	var newScale = bpm / CORE_BPM 	# new pitch scale = new BPM / original BPM (160). Ex: 120 / 160 = 0.75
-	if beatCount % 4 == 0:
-		for track in musicTracks:
-			track.seek(0.0)
+func syncMusicWithBpm():
+	var newScale = bpm / CORE_BPM # new pitch scale = new BPM / original BPM (160). Ex: 120 / 160 = 0.75
 	for track in musicTracks:
 		track.pitch_scale = newScale
+	if beatCount % 4 == 0:
+		print("new pitch: %.02f" % musicTracks[0].pitch_scale)
+		for track in musicTracks:
+			track.seek(0.0)
 
 
 func queueBpmChange(newBpm: int):

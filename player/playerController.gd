@@ -30,6 +30,7 @@ func get_input():
 		input = fighter.IN.DEFEND
 	elif(Input.is_action_just_released("defend")):
 		input = fighter.IN.DEFEND
+		
 	return input 
 
 func isPlayer():
