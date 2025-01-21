@@ -46,3 +46,8 @@ script = ExtResource("6_1ce3y")
 
 [node name="Fighter" parent="." instance=ExtResource("9_s267n")]
 position = Vector2(211, 30)
+MAX_SPEED = null
+ACCELERATION = null
+FRICTION = null
+ROTATION_SPEED = null
+QUEUE_TIMEOUT = null

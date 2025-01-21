@@ -11,29 +11,31 @@ var boomBox = null
 
 var timeOnBeat := 0.0
 var bpm := CORE_BPM
+
 var beatLength := 60.0 / bpm 
-var beatCount := 0 
+var beatCount := 0
 var inBeatWindow := false
 var onBeatFrame := false
 
 # HihatDown: Down beat ||| Openhat: "sizzle" ||| HihatUp: Up beat ||| Kick: self ||| SnareBase: "punch" ||| SnareFlare: pizazz
-@onready var musicTracks = [$HihatDown, $Openhat, $SnareBase]#, $Kick]
+@onready var musicTracks: Array[AudioStreamPlayer2D] = [$HihatDown, $Openhat, $SnareBase]#, $Kick]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.setBoomBox(self)
 	for track in musicTracks:
 		track.play()
-	pass 
+	beatCount = 1
+	syncWithBpm()
+
 
 func _physics_process(delta):
+	onBeatFrame = false
 	timeOnBeat += delta
 	# on beat frame
 	if timeOnBeat > beatLength:
 		hitBeat()
 		syncWithBpm()
-	else:
-		onBeatFrame = false
 	# beginning of beat window
 	if !inBeatWindow and (timeOnBeat >= beatLength - beatLength * BEAT_WINDOW):
 		inBeatWindow = true
@@ -53,12 +55,16 @@ func hitBeat():
 	beatCount += 1 
 
 
+# call this only on the beat frame, otherwise it will result in desync
 func syncWithBpm():
 	var newScale = bpm / CORE_BPM 	# new pitch scale = new BPM / original BPM (160). Ex: 120 / 160 = 0.75
+	if beatCount % 4 == 0:
+		for track in musicTracks:
+			track.seek(0.0)
 	for track in musicTracks:
 		track.pitch_scale = newScale
 
 
-func setBpm(newBpm: int):
+func queueBpmChange(newBpm: int):
 	bpm = newBpm
 	print("BPM: %d,  beatLength: %.03f" % [bpm, 60.0/bpm])

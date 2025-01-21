@@ -6,6 +6,8 @@ var bb = null
 func _ready():
 	bb = Global.boomBox
 	$Label.text = str(bb.bpm)
+	$HSlider.value = -60.0 # debug 
+	_on_h_slider_value_changed(-60.0) # debug
 	connectSlider()
 
 func _physics_process(_delta):
@@ -24,4 +26,4 @@ func connectSlider():
 func _on_h_slider_value_changed(value:float):
 	var newBpm = value + bb.CORE_BPM
 	$Label.text = str(newBpm)
-	bb.setBpm(newBpm as int)
+	bb.queueBpmChange(newBpm as int)
