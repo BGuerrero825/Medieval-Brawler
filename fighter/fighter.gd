@@ -47,7 +47,7 @@ func processState():
 	input = $controller.get_input()
 	var entry = false
 	
-	if bb.onBeatFrame:
+	if bb.onActionFrame:
 		if state != queuedState:
 			entry = true
 		state = queuedState

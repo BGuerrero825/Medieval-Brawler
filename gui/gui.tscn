@@ -1,26 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bhyrj6sq576c6"]
 
-[ext_resource type="Script" path="res://gui/gui.gd" id="1_o3bq1"]
+[ext_resource type="Script" uid="uid://bx6peanyfue20" path="res://gui/gui.gd" id="1_o3bq1"]
 [ext_resource type="Texture2D" uid="uid://bv2pmida7i1qu" path="res://environment_assets/metronome.png" id="2_rcw45"]
 [ext_resource type="Texture2D" uid="uid://7uspg00t7yy2" path="res://environment_assets/metrostick.png" id="3_i70he"]
-
-[sub_resource type="Animation" id="Animation_avrsq"]
-resource_name = "beat_fade"
-length = 2.0
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Metronome/Metrostick:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-1.13446, 1.13446]
-}
 
 [sub_resource type="Animation" id="Animation_2mwd8"]
 resource_name = "RESET"
@@ -73,10 +55,28 @@ tracks/3/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_avrsq"]
+resource_name = "beat_fade"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Metronome/Metrostick:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.13446, 1.13446]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6hc14"]
 _data = {
-"RESET": SubResource("Animation_2mwd8"),
-"beat_fade": SubResource("Animation_avrsq")
+&"RESET": SubResource("Animation_2mwd8"),
+&"beat_fade": SubResource("Animation_avrsq")
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -93,7 +93,7 @@ ticks_on_borders = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6hc14")
+&"": SubResource("AnimationLibrary_6hc14")
 }
 
 [node name="Metronome" type="Sprite2D" parent="."]

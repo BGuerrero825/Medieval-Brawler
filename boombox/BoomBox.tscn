@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8xbq10drbqeg"]
 
-[ext_resource type="Script" path="res://boombox/BoomBox.gd" id="1_y83iv"]
+[ext_resource type="Script" uid="uid://bbsskaneinwg2" path="res://boombox/BoomBox.gd" id="1_y83iv"]
 [ext_resource type="AudioStream" uid="uid://uh4k202mnpun" path="res://musictracks/hihat-808_down.ogg" id="2_6n0be"]
 [ext_resource type="AudioStream" uid="uid://70p6oaassfrl" path="res://musictracks/openhat-808.ogg" id="3_6velw"]
 [ext_resource type="AudioStream" uid="uid://b1anrd8whwsok" path="res://musictracks/kick-classic.ogg" id="4_xjeog"]

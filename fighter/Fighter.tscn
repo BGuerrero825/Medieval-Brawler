@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dedbthaioib8n" path="res://character_assets/pointer.png" id="2_r3um7"]
 [ext_resource type="Texture2D" uid="uid://dqmjyyeapt6hv" path="res://character_assets/shoulders.png" id="3_1dbd7"]
-[ext_resource type="Script" path="res://fighter/fighter.gd" id="4"]
+[ext_resource type="Script" uid="uid://bt3qsoevummnu" path="res://fighter/fighter.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://dnvdnlhqfhppa" path="res://character_assets/sword.png" id="4_ogiv0"]
 [ext_resource type="Texture2D" uid="uid://d17d2j4ry62lj" path="res://character_assets/spark.png" id="5_qe6w2"]
 [ext_resource type="Texture2D" uid="uid://i1fxeklr02pv" path="res://character_assets/swing.png" id="6_f1bto"]
@@ -1193,11 +1193,11 @@ tracks/16/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qew0s"]
 _data = {
-"RESET": SubResource("7"),
-"idle": SubResource("Animation_8yruu"),
-"sweep": SubResource("Animation_vrwbs"),
-"thrust": SubResource("Animation_14ry7"),
-"windup": SubResource("Animation_07v75")
+&"RESET": SubResource("7"),
+&"idle": SubResource("Animation_8yruu"),
+&"sweep": SubResource("Animation_vrwbs"),
+&"thrust": SubResource("Animation_14ry7"),
+&"windup": SubResource("Animation_07v75")
 }
 
 [node name="Fighter" type="CharacterBody2D"]
@@ -1290,5 +1290,5 @@ shape = SubResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_qew0s")
+&"": SubResource("AnimationLibrary_qew0s")
 }

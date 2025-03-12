@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0aq0lvdymtje"]
 
 [ext_resource type="PackedScene" uid="uid://dt1nkv6r851nn" path="res://fighter/Fighter.tscn" id="1_hxs2o"]
-[ext_resource type="Script" path="res://player/playerController.gd" id="4"]
+[ext_resource type="Script" uid="uid://dsnahq20tprae" path="res://player/playerController.gd" id="4"]
 
 [node name="Fighter" instance=ExtResource("1_hxs2o")]
 
